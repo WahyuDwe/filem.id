@@ -1,14 +1,17 @@
 package com.dwi.filmid.core.data.source.local.entity
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "movie")
 data class MovieEntity(
     @PrimaryKey
     @ColumnInfo(name = "id_movie")
-    val id: Int,
+    val idMovie: Int,
 
     @ColumnInfo(name = "title_movie")
     val title: String,
@@ -19,12 +22,9 @@ data class MovieEntity(
     @ColumnInfo(name = "poster_path_movie")
     val posterPath: String,
 
-    @ColumnInfo(name = "backdrop_path_movie")
-    val backdropPath: String,
-
     @ColumnInfo(name = "release_date_movie")
     val releaseDate: String,
 
     @ColumnInfo(name = "is_favorite_movie")
-    val isFavorite: Boolean = false
-)
+    var isFavorite: Boolean = false
+): Parcelable

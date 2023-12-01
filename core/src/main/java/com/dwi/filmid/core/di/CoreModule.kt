@@ -1,9 +1,14 @@
 package com.dwi.filmid.core.di
 
 import androidx.room.Room
-import androidx.room.RoomDatabase
+import com.dwi.filmid.core.BuildConfig
+import com.dwi.filmid.core.data.source.MoviesRepository
+import com.dwi.filmid.core.data.source.local.LocalDataSource
 import com.dwi.filmid.core.data.source.local.room.MovieDatabase
+import com.dwi.filmid.core.data.source.remote.RemoteDataSource
 import com.dwi.filmid.core.data.source.remote.network.ApiService
+import com.dwi.filmid.core.domain.repository.IMoviesRepository
+import com.dwi.filmid.core.utils.AppExecutors
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -32,10 +37,17 @@ val networkModule = module {
     }
     single {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()
         retrofit.create(ApiService::class.java)
     }
+}
+
+val repositoryModule = module {
+    single { LocalDataSource(get()) }
+    single { RemoteDataSource(get()) }
+    factory { AppExecutors() }
+    single<IMoviesRepository> { MoviesRepository(get(), get(), get()) }
 }

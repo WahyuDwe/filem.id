@@ -3,12 +3,13 @@ package com.dwi.filemid
 import android.app.Application
 import com.dwi.filmid.core.di.databaseModule
 import com.dwi.filmid.core.di.networkModule
+import com.dwi.filmid.core.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
-class MyApplication : Application() {
+open class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -19,7 +20,7 @@ class MyApplication : Application() {
                 listOf(
                     databaseModule,
                     networkModule,
-
+                    repositoryModule,
                 )
             )
         }

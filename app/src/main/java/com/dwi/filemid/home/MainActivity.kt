@@ -1,7 +1,8 @@
-package com.dwi.filemid
+package com.dwi.filemid.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.dwi.filemid.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
