@@ -1,37 +1,37 @@
-package com.dwi.filemid.home
+package com.dwi.filmid.core.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.dwi.filemid.databinding.ItemCarouselBinding
 import com.dwi.filmid.core.BuildConfig
+import com.dwi.filmid.core.databinding.ItemMoviePopularBinding
 import com.dwi.filmid.core.domain.model.Movies
 import com.dwi.filmid.core.utils.DiffUtils
 
-class CarouselAdapter : RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder>() {
+class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private var oldList = emptyList<Movies>()
 
-    inner class CarouselViewHolder(private val binding: ItemCarouselBinding) :
+    inner class MovieViewHolder(private val binding: ItemMoviePopularBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Movies) {
             binding.apply {
-                carouselImageView.load(BuildConfig.IMAGE_URL + item.posterPath)
-                carouselTextView.text = item.title
+                imgPoster.load(BuildConfig.IMAGE_URL + item.posterPath)
             }
         }
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselViewHolder {
-        val itemCarouselBinding =
-            ItemCarouselBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CarouselViewHolder(itemCarouselBinding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+        val itemMoviePopularBinding =
+            ItemMoviePopularBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MovieViewHolder(itemMoviePopularBinding)
     }
 
     override fun getItemCount(): Int = oldList.size
 
-    override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = oldList[position]
         holder.bind(item)
     }

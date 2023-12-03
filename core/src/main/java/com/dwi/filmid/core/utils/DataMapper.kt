@@ -10,7 +10,7 @@ object DataMapper {
         input.map {
             val movies = MovieEntity(
                 idMovie = it.id,
-                title = it.title,
+                title = it.originalTitle,
                 overview = it.overview,
                 posterPath = it.posterPath,
                 releaseDate = it.releaseDate,
