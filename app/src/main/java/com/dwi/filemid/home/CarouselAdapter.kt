@@ -1,11 +1,13 @@
 package com.dwi.filemid.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.dwi.filemid.databinding.ItemCarouselBinding
+import com.dwi.filemid.detail.DetailActivity
 import com.dwi.filmid.core.BuildConfig
 import com.dwi.filmid.core.domain.model.Movies
 import com.dwi.filmid.core.utils.DiffUtils
@@ -19,6 +21,12 @@ class CarouselAdapter : RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder>
             binding.apply {
                 carouselImageView.load(BuildConfig.IMAGE_URL + item.posterPath)
                 carouselTextView.text = item.title
+            }
+
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_DATA, item.idMovie)
+                itemView.context.startActivity(intent)
             }
         }
     }

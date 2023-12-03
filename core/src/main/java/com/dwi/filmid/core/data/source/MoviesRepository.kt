@@ -52,6 +52,23 @@ class MoviesRepository(
 
         }.asFlow()
 
+    override fun getDetailMovie(movieId: Int): Flow<Resource<Movies>> =
+        object : NetworkBoundResource<Movies, MovieResponse>(appExecutors) {
+            override fun loadFromDb(): Flow<Movies> =
+                localDataSource.getDetailMovie(movieId).map { DataMapper.mapEntityToDomain(it) }
+
+            override suspend fun createCall(): Flow<ApiResponse<MovieResponse>> =
+                remoteDataSource.getDetailMovie(movieId)
+
+            override suspend fun saveCallResult(data: MovieResponse) {
+                val movie = DataMapper.mapResponseToEntity(data)
+                localDataSource.insertDetailMovie(movie)
+            }
+
+            override fun shouldFetch(data: Movies?): Boolean = data == null
+
+        }.asFlow()
+
     override fun getFavoriteMovies(): Flow<List<Movies>> {
         return localDataSource.getFavoriteMovies().map { DataMapper.mapEntitiesToDomain(it) }
     }

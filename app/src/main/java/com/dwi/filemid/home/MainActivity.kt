@@ -1,13 +1,14 @@
 package com.dwi.filemid.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.dwi.filemid.databinding.ActivityMainBinding
+import com.dwi.filemid.detail.DetailActivity
 import com.dwi.filmid.core.data.source.Resource
+import com.dwi.filmid.core.domain.model.Movies
 import com.dwi.filmid.core.ui.MovieAdapter
 import com.google.android.material.carousel.CarouselLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -52,7 +53,16 @@ class MainActivity : AppCompatActivity() {
                     is Resource.Success -> {
                         binding.progressbar.hide()
                         movies.data?.let { movieAdapter.setData(it) }
+                        movieAdapter.setOnItemClickCallback(object :
+                            MovieAdapter.OnItemClickCallback {
+                            override fun onItemClicked(data: Movies) {
+                                val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                                intent.putExtra(DetailActivity.EXTRA_DATA, data.idMovie)
+                                startActivity(intent)
+                            }
+                        })
                     }
+
                     is Resource.Error -> {
                         binding.progressbar.hide()
                         Log.e("MainActivity", "onCreate: ${movies.msg}")

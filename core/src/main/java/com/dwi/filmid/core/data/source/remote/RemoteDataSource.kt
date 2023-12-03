@@ -45,4 +45,16 @@ class RemoteDataSource(private val apiService: ApiService) {
             }
         }.flowOn(Dispatchers.IO)
     }
+
+    fun getDetailMovie(movieId: Int): Flow<ApiResponse<MovieResponse>> {
+        return flow {
+            try {
+                val response = apiService.getDetailMovie(movieId = movieId)
+                emit(ApiResponse.Success(response))
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("RemoteDataSource", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 }

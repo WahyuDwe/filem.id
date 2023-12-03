@@ -13,7 +13,6 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Lagi Tayang"
-        android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

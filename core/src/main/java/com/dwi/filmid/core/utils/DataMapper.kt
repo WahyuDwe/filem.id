@@ -15,6 +15,7 @@ object DataMapper {
                 posterPath = it.posterPath,
                 releaseDate = it.releaseDate,
                 movieType = movieType,
+                movieRating = it.voteAverage,
                 isFavorite = false
             )
             moviesList.add(movies)
@@ -29,6 +30,7 @@ object DataMapper {
             overview = it.overview,
             posterPath = it.posterPath,
             releaseDate = it.releaseDate,
+            rating = it.movieRating,
             isFavorite = it.isFavorite
         )
     }
@@ -40,7 +42,29 @@ object DataMapper {
         posterPath = input.posterPath,
         releaseDate = input.releaseDate,
         movieType = null,
+        movieRating = input.rating,
         isFavorite = input.isFavorite
+    )
+
+    fun mapEntityToDomain(input: MovieEntity): Movies = Movies(
+        idMovie = input.idMovie,
+        title = input.title,
+        overview = input.overview,
+        posterPath = input.posterPath,
+        releaseDate = input.releaseDate,
+        rating = input.movieRating,
+        isFavorite = input.isFavorite
+    )
+
+    fun mapResponseToEntity(input: MovieResponse): MovieEntity = MovieEntity(
+        idMovie = input.id,
+        title = input.originalTitle,
+        overview = input.overview,
+        posterPath = input.posterPath,
+        releaseDate = input.releaseDate,
+        movieType = null,
+        movieRating = input.voteAverage,
+        isFavorite = false
     )
 
 }

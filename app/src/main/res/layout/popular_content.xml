@@ -7,13 +7,15 @@
 
     <TextView
         android:id="@+id/tv_popular_movie"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Paling Populer"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,15 +25,13 @@
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingBottom="32dp"
-        android:layout_marginTop="8dp"
-        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:spanCount="2"
-        tools:itemCount="10"
         app:layout_constraintTop_toBottomOf="@+id/tv_popular_movie"
+        app:spanCount="2"
+        tools:itemCount="10"
         tools:listitem="@layout/item_movie_popular" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

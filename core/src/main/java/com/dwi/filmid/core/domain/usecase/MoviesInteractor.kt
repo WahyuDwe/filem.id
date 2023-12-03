@@ -12,6 +12,9 @@ class MoviesInteractor(private val moviesRepository: MoviesRepository) : MoviesU
     override fun getAllPopularMovies(): Flow<Resource<List<Movies>>> =
         moviesRepository.getAllPopularMovies()
 
+    override fun getDetailMovie(movieId: Int): Flow<Resource<Movies>> =
+        moviesRepository.getDetailMovie(movieId)
+
     override fun getFavoriteMovies(): Flow<List<Movies>> = moviesRepository.getFavoriteMovies()
 
     override fun setFavoriteMovies(movies: Movies, state: Boolean) =
