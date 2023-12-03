@@ -21,13 +21,31 @@ class MoviesRepository(
             override fun loadFromDb(): Flow<List<Movies>> =
                 localDataSource.getNowPlayingMovies().map { DataMapper.mapEntitiesToDomain(it) }
 
-
             override suspend fun createCall(): Flow<ApiResponse<List<MovieResponse>>> =
                 remoteDataSource.getAllNowPlayingMovies()
 
             override suspend fun saveCallResult(data: List<MovieResponse>) {
-                val tourismList = DataMapper.mapResponsesToEntities(data)
-                localDataSource.insertTourism(tourismList)
+                val movieList = DataMapper.mapResponsesToEntities(data, MOVIE_TYPE_NOW_PLAYING)
+                localDataSource.insertMovies(movieList)
+            }
+
+            override fun shouldFetch(data: List<Movies>?): Boolean = data.isNullOrEmpty()
+
+        }.asFlow()
+
+    override fun getAllPopularMovies(): Flow<Resource<List<Movies>>> =
+        object : NetworkBoundResource<List<Movies>, List<MovieResponse>>(appExecutors) {
+            override fun loadFromDb(): Flow<List<Movies>> =
+                localDataSource.getPopularMovies().map { DataMapper.mapEntitiesToDomain(it) }
+
+
+            override suspend fun createCall(): Flow<ApiResponse<List<MovieResponse>>> =
+                remoteDataSource.getAllPopularMovies()
+
+
+            override suspend fun saveCallResult(data: List<MovieResponse>) {
+                val movieList = DataMapper.mapResponsesToEntities(data, MOVIE_TYPE_POPULAR)
+                localDataSource.insertMovies(movieList)
             }
 
             override fun shouldFetch(data: List<Movies>?): Boolean = data.isNullOrEmpty()
@@ -41,5 +59,10 @@ class MoviesRepository(
     override fun setFavoriteMovies(movies: Movies, state: Boolean) {
         val movieEntity = DataMapper.mapDomainToEntity(movies)
         appExecutors.diskIO().execute { localDataSource.setFavoriteMovie(movieEntity, state) }
+    }
+
+    companion object {
+        const val MOVIE_TYPE_NOW_PLAYING = "now_playing"
+        const val MOVIE_TYPE_POPULAR = "popular"
     }
 }

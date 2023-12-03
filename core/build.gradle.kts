@@ -23,7 +23,7 @@ android {
 
         buildConfigField("String", "AUTHORIZATION", "\"${properties.getProperty("AUTHORIZATION")}\"")
         buildConfigField("String", "BASE_URL", "\"${properties.getProperty("BASE_URL")}\"")
-        buildConfigField("String", "IMAGE_URL", "\"${properties.getProperty("BASE_URL")}\"")
+        buildConfigField("String", "IMAGE_URL", "\"${properties.getProperty("IMAGE_URL")}\"")
     }
 
     buildTypes {

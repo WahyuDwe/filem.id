@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MoviesUseCase {
     fun getAllNowPlayingMovies(): Flow<Resource<List<Movies>>>
+    fun getAllPopularMovies(): Flow<Resource<List<Movies>>>
     fun getFavoriteMovies(): Flow<List<Movies>>
     fun setFavoriteMovies(movies: Movies, state: Boolean)
 }

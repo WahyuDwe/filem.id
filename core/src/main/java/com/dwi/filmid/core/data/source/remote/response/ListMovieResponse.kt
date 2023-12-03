@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 @Parcelize
-data class ListNowPlayingResponse(
+data class ListMovieResponse(
 
 	@field:SerializedName("page")
 	val page: Int? = null,

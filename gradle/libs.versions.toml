@@ -30,6 +30,7 @@ espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref =
 ext-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
 junit = { module = "junit:junit", version.ref = "junit" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-core" }
+koin-android-viewmodel = { module = "io.insert-koin:koin-android-viewmodel", version.ref = "koin-core" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin-core" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines-android" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines-core" }

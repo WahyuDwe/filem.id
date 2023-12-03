@@ -1,7 +1,7 @@
 package com.dwi.filmid.core.data.source.remote.network
 
 import com.dwi.filmid.core.BuildConfig
-import com.dwi.filmid.core.data.source.remote.response.ListNowPlayingResponse
+import com.dwi.filmid.core.data.source.remote.response.ListMovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -11,5 +11,12 @@ interface ApiService {
     suspend fun getNowPlayingMovies(
         @Header("Authorization") token: String = BuildConfig.AUTHORIZATION,
         @Query("region") region: String = "id",
-    ): ListNowPlayingResponse
+    ): ListMovieResponse
+
+    @GET("movie/popular")
+    suspend fun getPopularMovies(
+        @Header("Authorization") token: String = BuildConfig.AUTHORIZATION,
+    ): ListMovieResponse
+
+
 }

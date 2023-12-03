@@ -10,8 +10,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MovieDao {
-    @Query("SELECT * FROM movie")
+    @Query("SELECT * FROM movie WHERE movie_type = 'now_playing' ")
     fun getNowPlayingMovies(): Flow<List<MovieEntity>>
+
+    @Query("SELECT * FROM movie WHERE movie_type = 'popular'")
+    fun getPopularMovies(): Flow<List<MovieEntity>>
 
     @Query("SELECT * FROM movie WHERE is_favorite_movie = 1")
     fun getFavoriteMovies(): Flow<List<MovieEntity>>

@@ -25,6 +25,9 @@ data class MovieEntity(
     @ColumnInfo(name = "release_date_movie")
     val releaseDate: String,
 
+    @ColumnInfo(name = "movie_type")
+    val movieType: String?,
+
     @ColumnInfo(name = "is_favorite_movie")
     var isFavorite: Boolean = false
-): Parcelable
+) : Parcelable

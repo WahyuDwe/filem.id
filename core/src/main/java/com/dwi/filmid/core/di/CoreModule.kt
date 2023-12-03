@@ -12,6 +12,7 @@ import com.dwi.filmid.core.utils.AppExecutors
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.bind
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,7 +23,7 @@ val databaseModule = module {
     single {
         Room.databaseBuilder(
             androidContext(),
-            MovieDatabase::class.java, "filemid.db"
+            MovieDatabase::class.java, "filmid.db"
         ).fallbackToDestructiveMigration().build()
     }
 }
@@ -49,5 +50,5 @@ val repositoryModule = module {
     single { LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
     factory { AppExecutors() }
-    single<IMoviesRepository> { MoviesRepository(get(), get(), get()) }
+    single { MoviesRepository(get(), get(), get()) } bind IMoviesRepository::class
 }
