@@ -12,8 +12,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Paling Populer"
+        android:textStyle="bold"
+        android:text="@string/paling_populer"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,16 +21,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_movie"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:paddingBottom="32dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:nestedScrollingEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_popular_movie"
-        app:spanCount="2"
         tools:itemCount="10"
         tools:listitem="@layout/item_movie_popular" />
 

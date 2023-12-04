@@ -1,4 +1,12 @@
 <resources>
-    <string name="app_name">filem.id</string>
+    <string name="app_name">FilemId</string>
     <string name="title_favorite">Favorite</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open_navigation_drawer">Open navigation drawer</string>
+    <string name="close_navigation_drawer">Close navigation drawer</string>
+    <string name="favorit">Favorit</string>
+    <string name="beranda">Beranda</string>
+    <string name="paling_populer">Paling Populer</string>
+    <string name="lagi_tayang">Lagi Tayang</string>
 </resources>
