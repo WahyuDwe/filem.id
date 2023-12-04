@@ -9,9 +9,9 @@
             android:icon="@drawable/ic_home"
             android:title="@string/beranda" />
         <item
-            android:id="@+id/nav_favorite"
-            android:icon="@drawable/ic_favorite"
-            android:title="@string/favorit" />
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search"
+            android:title="@string/cari_filem" />
     </group>
 
 </menu>

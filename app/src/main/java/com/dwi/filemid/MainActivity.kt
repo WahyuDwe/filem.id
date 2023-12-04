@@ -1,6 +1,9 @@
 package com.dwi.filemid
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -31,7 +34,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
 
         binding.drawerLayout.addDrawerListener(toggle)
-        // change color of hamburger icon
         toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
         toggle.syncState()
 
@@ -48,10 +50,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.appbar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_favorite -> {
+                val uri = Uri.parse("filemid://favorite")
+                startActivity(Intent(Intent.ACTION_VIEW, uri))
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         var fragment: Fragment? = null
         var title = getString(R.string.app_name)
-
 
         when (item.itemId) {
             R.id.nav_home -> {
@@ -59,9 +75,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 title = getString(R.string.app_name)
             }
 
-            R.id.nav_favorite -> {
+            R.id.nav_search -> {
                 fragment = HomeFragment()
-                title = getString(R.string.favorit)
+                title = getString(R.string.cari_filem)
             }
         }
 

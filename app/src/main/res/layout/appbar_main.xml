@@ -13,7 +13,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/Theme.Material3.Light"
+            app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall"
             app:titleTextColor="@color/white"
+            app:menu="@menu/appbar_menu"
             android:background="?attr/colorPrimary"
             app:title="Filem.id" />
 

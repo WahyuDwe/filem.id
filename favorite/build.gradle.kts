@@ -37,4 +37,7 @@ android {
 dependencies {
     implementation(project(":app"))
     implementation(project(":core"))
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraintlayout)
 }
