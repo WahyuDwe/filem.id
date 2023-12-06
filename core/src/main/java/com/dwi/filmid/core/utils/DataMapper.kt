@@ -5,6 +5,8 @@ import com.dwi.filmid.core.data.source.remote.response.MovieResponse
 import com.dwi.filmid.core.domain.model.Movies
 
 object DataMapper {
+
+    // map from list response to entity
     fun mapResponsesToEntities(input: List<MovieResponse>, movieType: String): List<MovieEntity> {
         val moviesList = ArrayList<MovieEntity>()
         input.map {
@@ -23,6 +25,7 @@ object DataMapper {
         return moviesList
     }
 
+    // map from list entity to domain
     fun mapEntitiesToDomain(input: List<MovieEntity>): List<Movies> = input.map {
         Movies(
             idMovie = it.idMovie,
@@ -35,6 +38,7 @@ object DataMapper {
         )
     }
 
+    // map from domain to entity
     fun mapDomainToEntity(input: Movies): MovieEntity = MovieEntity(
         idMovie = input.idMovie,
         title = input.title,
@@ -46,6 +50,7 @@ object DataMapper {
         isFavorite = input.isFavorite
     )
 
+    // map from entity to domain
     fun mapEntityToDomain(input: MovieEntity): Movies = Movies(
         idMovie = input.idMovie,
         title = input.title,
@@ -56,6 +61,7 @@ object DataMapper {
         isFavorite = input.isFavorite
     )
 
+    // map from response detail movie to entity
     fun mapResponseToEntity(input: MovieResponse): MovieEntity = MovieEntity(
         idMovie = input.id,
         title = input.originalTitle,
