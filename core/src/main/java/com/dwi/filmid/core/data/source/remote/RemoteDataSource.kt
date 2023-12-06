@@ -57,4 +57,16 @@ class RemoteDataSource(private val apiService: ApiService) {
             }
         }.flowOn(Dispatchers.IO)
     }
+
+    fun getSearchMovie(query: String): Flow<ApiResponse<MovieResponse>> {
+        return flow {
+            try {
+                val response = apiService.getSearchMovies(query = query)
+                emit(ApiResponse.Success(response))
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("RemoteDataSource", e.toString())
+            }
+        }
+    }
 }

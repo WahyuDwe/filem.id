@@ -26,5 +26,10 @@ interface ApiService {
         @Path("movie_id") movieId: Int,
     ): MovieResponse
 
+    @GET("search/movie")
+    suspend fun getSearchMovies(
+        @Header("Authorization") token: String = BuildConfig.AUTHORIZATION,
+        @Query("query") query: String,
+    ): MovieResponse
 
 }

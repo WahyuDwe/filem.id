@@ -26,11 +26,11 @@ class FavoriteActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        setUpAdapter()
         favoriteViewModel.favoriteMovies.observe(this) { favorite ->
             movieAdapter.setData(favorite)
         }
 
-        setUpAdapter()
     }
 
     private fun setUpAdapter() {

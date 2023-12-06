@@ -69,6 +69,26 @@ class MoviesRepository(
 
         }.asFlow()
 
+    override fun getSearchMovies(query: String): Flow<Resource<List<Movies>>> =
+        object : NetworkBoundResource<List<Movies>, List<MovieResponse>>(appExecutors) {
+            override fun loadFromDb(): Flow<List<Movies>> {
+                TODO("Not yet implemented")
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<List<MovieResponse>>> {
+                TODO("Not yet implemented")
+            }
+
+            override suspend fun saveCallResult(data: List<MovieResponse>) {
+                TODO("Not yet implemented")
+            }
+
+            override fun shouldFetch(data: List<Movies>?): Boolean {
+                TODO("Not yet implemented")
+            }
+
+        }.asFlow()
+
     override fun getFavoriteMovies(): Flow<List<Movies>> {
         return localDataSource.getFavoriteMovies().map { DataMapper.mapEntitiesToDomain(it) }
     }

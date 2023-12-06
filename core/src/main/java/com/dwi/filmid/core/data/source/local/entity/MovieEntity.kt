@@ -20,7 +20,7 @@ data class MovieEntity(
     val overview: String,
 
     @ColumnInfo(name = "poster_path_movie")
-    val posterPath: String,
+    val posterPath: String? = null,
 
     @ColumnInfo(name = "release_date_movie")
     val releaseDate: String,

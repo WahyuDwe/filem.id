@@ -8,7 +8,7 @@ data class Movies(
     val idMovie: Int,
     val title: String,
     val overview: String,
-    val posterPath: String,
+    val posterPath: String? = null,
     val releaseDate: String,
     val rating: Double,
     var isFavorite: Boolean

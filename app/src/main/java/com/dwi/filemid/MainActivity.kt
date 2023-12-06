@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.dwi.filemid.databinding.ActivityMainBinding
 import com.dwi.filemid.home.HomeFragment
+import com.dwi.filemid.search.SearchFragment
 import com.google.android.material.navigation.NavigationView
 
 
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_search -> {
-                fragment = HomeFragment()
+                fragment = SearchFragment()
                 title = getString(R.string.cari_filem)
             }
         }
