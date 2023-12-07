@@ -11,4 +11,5 @@
     <string name="lagi_tayang">Lagi Tayang</string>
     <string name="cari_filem">Cari Filem</string>
     <string name="cari">Cari...</string>
+    <string name="data_filem_tidak_ditemukan">Data filem tidak ditemukan</string>
 </resources>

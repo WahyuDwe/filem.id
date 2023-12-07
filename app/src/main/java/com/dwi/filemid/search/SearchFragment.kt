@@ -1,14 +1,13 @@
 package com.dwi.filemid.search
 
 import android.os.Bundle
-import android.util.Log
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import com.dwi.filemid.R
 import com.dwi.filemid.databinding.FragmentSearchBinding
 import com.dwi.filmid.core.data.source.Resource
 import com.dwi.filmid.core.ui.MovieAdapter
@@ -22,8 +21,7 @@ class SearchFragment : Fragment() {
     private lateinit var searchAdapter: MovieAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
@@ -32,55 +30,61 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.progressbar.hide()
         val searchView = binding.searchView
-        val searchBar = binding.searchBar
-
+//        val searchBar = binding.searchBar
         searchAdapter = MovieAdapter()
-//        binding.searchView.editText.setOnEditorActionListener { textView, i, keyEvent ->
-//            if (i == EditorInfo.IME_ACTION_SEARCH) {
-//                Toast.makeText(context, textView.text, Toast.LENGTH_SHORT).show()
-//                searchBar.text = searchView.text
-//                searchView.hide()
-//                false
-//            } else {
-//                true
-//            }
-//
-//        }
-//        searchView
-//            .editText
-//            .setOnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
-//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    searchViewModel.getSearchMovies(v?.text.toString())
-//                        .observe(viewLifecycleOwner) { search ->
-//                            if (search != null) {
-//                                when (search) {
-//                                    is Resource.Loading -> binding.progressbar.show()
-//
-//                                    is Resource.Success -> {
-//                                        binding.progressbar.visibility = View.GONE
-//                                        search.data?.let { searchAdapter.setData(it) }
-//                                    }
-//
-//                                    is Resource.Error -> {
-//                                        binding.progressbar.hide()
-//                                        Log.e("MainActivity", "onCreate: ${search.msg}")
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    searchBar.text = searchView.text
-//                    searchView.hide()
-//                    false
-//                } else {
-//                    true
-//                }
-//
-//            }
+
+        searchView.apply {
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    if (query.isNotEmpty()) {
+                        searchViewModel.getSearchMovies(query)
+                            .observe(viewLifecycleOwner) { movies ->
+                                if (movies != null) {
+                                    when (movies) {
+                                        is Resource.Loading -> binding.progressbar.show()
+
+                                        is Resource.Success -> {
+                                            binding.progressbar.hide()
+                                            movies.data?.let { searchAdapter.setData(it) }
+                                        }
+
+                                        is Resource.Error -> {
+                                            binding.progressbar.hide()
+                                            binding.tvError.visibility = View.VISIBLE
+                                            binding.tvError.text =
+                                                movies.msg ?: getString(
+                                                    R.string.data_filem_tidak_ditemukan
+                                                )
+                                        }
+                                    }
+                                }
+                            }
+                    }
+                    // hide keyboard
+                    searchView.clearFocus()
+                    return true
+                }
+
+                override fun onQueryTextChange(query: String): Boolean = false
+
+            })
+        }
+
+        setUpAdapter()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setUpAdapter() {
+        with(binding.rvMovie) {
+            layoutManager = GridLayoutManager(context, 2)
+            setHasFixedSize(true)
+            this.adapter = searchAdapter
+        }
     }
 }
