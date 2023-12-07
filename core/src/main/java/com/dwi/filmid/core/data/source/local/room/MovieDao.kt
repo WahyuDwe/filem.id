@@ -22,6 +22,9 @@ interface MovieDao {
     @Query("SELECT * FROM movie WHERE is_favorite_movie = 1")
     fun getFavoriteMovies(): Flow<List<MovieEntity>>
 
+    @Query("SELECT * FROM movie WHERE title_movie LIKE '%' || :query || '%'")
+    fun getSearchMovies(query: String): Flow<List<MovieEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovies(tourism: List<MovieEntity>)
 

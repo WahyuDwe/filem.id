@@ -14,6 +14,8 @@ class LocalDataSource(private val movieDao: MovieDao) {
 
     fun getFavoriteMovies(): Flow<List<MovieEntity>> = movieDao.getFavoriteMovies()
 
+    fun getSearchMovies(query: String): Flow<List<MovieEntity>> = movieDao.getSearchMovies(query)
+
     suspend fun insertMovies(movieList: List<MovieEntity>) = movieDao.insertMovies(movieList)
 
     suspend fun insertDetailMovie(movie: MovieEntity) = movieDao.insertDetailMovie(movie)

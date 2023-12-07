@@ -30,6 +30,6 @@ interface ApiService {
     suspend fun getSearchMovies(
         @Header("Authorization") token: String = BuildConfig.AUTHORIZATION,
         @Query("query") query: String,
-    ): MovieResponse
+    ): ListMovieResponse
 
 }
