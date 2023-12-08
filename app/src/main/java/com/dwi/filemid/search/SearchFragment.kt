@@ -1,9 +1,11 @@
 package com.dwi.filemid.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,8 +33,8 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.progressbar.hide()
+        binding.viewError.tvError.visibility = View.GONE
         val searchView = binding.searchView
-//        val searchBar = binding.searchBar
         searchAdapter = MovieAdapter()
 
         searchView.apply {
@@ -43,17 +45,30 @@ class SearchFragment : Fragment() {
                             .observe(viewLifecycleOwner) { movies ->
                                 if (movies != null) {
                                     when (movies) {
-                                        is Resource.Loading -> binding.progressbar.show()
+                                        is Resource.Loading -> {
+                                            Log.d("SearchFragment", "onViewCreated: Loading")
+                                            binding.viewError.tvError.visibility = View.GONE
+                                            binding.progressbar.show()
+                                        }
 
                                         is Resource.Success -> {
+                                            Log.d("SearchFragment", "onViewCreated: Success")
                                             binding.progressbar.hide()
+                                            binding.viewError.tvError.visibility = View.GONE
                                             movies.data?.let { searchAdapter.setData(it) }
+
+                                            if (movies.data.isNullOrEmpty()) {
+                                                binding.viewError.tvError.visibility = View.VISIBLE
+                                                binding.rvMovie.visibility = View.GONE
+                                                binding.viewError.tvError.text =
+                                                    getString(R.string.data_filem_tidak_ditemukan)
+                                            }
                                         }
 
                                         is Resource.Error -> {
+                                            Log.d("SearchFragment", "onViewCreated: Error")
                                             binding.progressbar.hide()
-                                            binding.tvError.visibility = View.VISIBLE
-                                            binding.tvError.text =
+                                            binding.viewError.tvError.text =
                                                 movies.msg ?: getString(
                                                     R.string.data_filem_tidak_ditemukan
                                                 )
