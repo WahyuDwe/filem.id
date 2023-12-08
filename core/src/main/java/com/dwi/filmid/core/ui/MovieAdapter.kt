@@ -6,6 +6,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.size.Scale
 import com.dwi.filmid.core.BuildConfig
 import com.dwi.filmid.core.R
 import com.dwi.filmid.core.databinding.ItemMoviePopularBinding

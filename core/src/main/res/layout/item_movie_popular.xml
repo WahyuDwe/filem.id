@@ -20,7 +20,7 @@
             android:id="@+id/img_poster"
             android:layout_width="170dp"
             android:layout_height="200dp"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             tools:src="@tools:sample/backgrounds/scenic" />
 
     </androidx.cardview.widget.CardView>
