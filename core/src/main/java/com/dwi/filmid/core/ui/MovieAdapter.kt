@@ -2,10 +2,12 @@ package com.dwi.filmid.core.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.dwi.filmid.core.BuildConfig
+import com.dwi.filmid.core.R
 import com.dwi.filmid.core.databinding.ItemMoviePopularBinding
 import com.dwi.filmid.core.domain.model.Movies
 import com.dwi.filmid.core.utils.DiffUtils
@@ -18,7 +20,15 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Movies) {
             binding.apply {
-                imgPoster.load(BuildConfig.IMAGE_URL + item.posterPath)
+                if (item.posterPath == null) {
+                    imgPoster.scaleType = ImageView.ScaleType.CENTER_CROP
+                    imgPoster.load(R.drawable.ic_placeholder)
+                } else {
+                    imgPoster.load(BuildConfig.IMAGE_URL + item.posterPath) {
+                        crossfade(true)
+                        placeholder(R.drawable.ic_placeholder)
+                    }
+                }
             }
 
             itemView.setOnClickListener {

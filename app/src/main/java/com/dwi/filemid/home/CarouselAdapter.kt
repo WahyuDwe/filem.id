@@ -3,12 +3,14 @@ package com.dwi.filemid.home
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.dwi.filemid.databinding.ItemCarouselBinding
 import com.dwi.filemid.detail.DetailActivity
 import com.dwi.filmid.core.BuildConfig
+import com.dwi.filmid.core.R
 import com.dwi.filmid.core.domain.model.Movies
 import com.dwi.filmid.core.utils.DiffUtils
 
@@ -19,8 +21,14 @@ class CarouselAdapter : RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder>
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Movies) {
             binding.apply {
-                carouselImageView.load(BuildConfig.IMAGE_URL + item.posterPath)
-                carouselTextView.text = item.title
+                if (item.posterPath == null) {
+                    carouselImageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                    carouselImageView.load(R.drawable.ic_placeholder)
+                    carouselTextView.text = item.title
+                } else {
+                    carouselImageView.load(BuildConfig.IMAGE_URL + item.posterPath)
+                    carouselTextView.text = item.title
+                }
             }
 
             itemView.setOnClickListener {

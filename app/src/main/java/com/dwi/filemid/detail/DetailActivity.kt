@@ -5,14 +5,14 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import coil.load
-import com.dwi.filemid.R
 import com.dwi.filemid.databinding.ActivityDetailBinding
 import com.dwi.filmid.core.BuildConfig
 import com.dwi.filmid.core.data.source.Resource
-
 import com.dwi.filmid.core.domain.model.Movies
 import com.google.android.material.appbar.AppBarLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.dwi.filemid.R as Rapp
+import com.dwi.filmid.core.R as Rcore
 
 class DetailActivity : AppCompatActivity() {
 
@@ -42,6 +42,11 @@ class DetailActivity : AppCompatActivity() {
                             binding.progressbar.hide()
                             populateContentDetail(detail.data)
                             showTitleCollapse(detail.data?.title.toString())
+
+                            if (detail.data?.posterPath == null) {
+                                binding.ivDetailToolbar.load(Rcore.drawable.ic_placeholder)
+                                binding.detailImagePoster.load(Rcore.drawable.ic_placeholder)
+                            }
                         }
 
                         is Resource.Error -> {
@@ -80,11 +85,11 @@ class DetailActivity : AppCompatActivity() {
         binding.fabFavorite.apply {
             if (statusFavorite) {
                 this.setImageDrawable(
-                    ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_favorite)
+                    ContextCompat.getDrawable(this@DetailActivity, Rapp.drawable.ic_favorite)
                 )
             } else {
                 this.setImageDrawable(
-                    ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_favorite_border)
+                    ContextCompat.getDrawable(this@DetailActivity, Rapp.drawable.ic_favorite_border)
                 )
 
             }
