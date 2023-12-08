@@ -16,6 +16,7 @@ class AppExecutors @VisibleForTesting constructor(
         Executors.newFixedThreadPool(THREAD_COUNT),
         MainThreadExecutor()
     )
+
     fun diskIO(): Executor = diskIO
 
     fun networkIO(): Executor = networkIO

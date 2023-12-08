@@ -15,7 +15,6 @@ import com.dwi.filemid.home.HomeFragment
 import com.dwi.filemid.search.SearchFragment
 import com.google.android.material.navigation.NavigationView
 
-
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding

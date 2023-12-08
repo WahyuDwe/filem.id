@@ -1,5 +1,6 @@
 package com.dwi.filemid.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,21 +11,21 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dwi.filemid.R
 import com.dwi.filemid.databinding.FragmentSearchBinding
+import com.dwi.filemid.detail.DetailActivity
 import com.dwi.filmid.core.data.source.Resource
+import com.dwi.filmid.core.domain.model.Movies
 import com.dwi.filmid.core.ui.MovieAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class SearchFragment : Fragment() {
     private val searchViewModel: SearchViewModel by viewModel()
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-    private lateinit var searchAdapter: MovieAdapter
+    private lateinit var movieAdapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,9 +33,10 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.progressbar.hide()
-        binding.viewError.tvError.visibility = View.GONE
+        binding.lottieViewSearch.visibility = View.VISIBLE
+        binding.tvDescription.visibility = View.VISIBLE
         val searchView = binding.searchView
-        searchAdapter = MovieAdapter()
+        movieAdapter = MovieAdapter()
 
         searchView.apply {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -43,30 +45,42 @@ class SearchFragment : Fragment() {
                         searchViewModel.getSearchMovies(query)
                             .observe(viewLifecycleOwner) { movies ->
                                 if (movies != null) {
+                                    binding.lottieViewSearch.visibility = View.GONE
+                                    binding.tvDescription.visibility = View.GONE
                                     when (movies) {
                                         is Resource.Loading -> {
                                             Log.d("SearchFragment", "onViewCreated: Loading")
-                                            binding.viewError.tvError.visibility = View.GONE
                                             binding.progressbar.show()
                                         }
 
                                         is Resource.Success -> {
                                             Log.d("SearchFragment", "onViewCreated: Success")
                                             binding.progressbar.hide()
-                                            binding.viewError.tvError.visibility = View.GONE
-                                            movies.data?.let { searchAdapter.setData(it) }
+                                            movies.data?.let { movieAdapter.setData(it) }
+                                            movieAdapter.setOnItemClickCallback(object :
+                                                MovieAdapter.OnItemClickCallback {
+                                                override fun onItemClicked(data: Movies) {
+                                                    val intent =
+                                                        Intent(activity, DetailActivity::class.java)
+                                                    intent.putExtra(
+                                                        DetailActivity.EXTRA_DATA, data.idMovie
+                                                    )
+                                                    startActivity(intent)
+                                                }
+
+                                            })
 
                                             if (movies.data.isNullOrEmpty()) {
+                                                binding.viewError.lottieView.visibility =
+                                                    View.VISIBLE
                                                 binding.viewError.tvError.visibility = View.VISIBLE
-                                                binding.rvMovie.visibility = View.GONE
-                                                binding.viewError.tvError.text =
-                                                    getString(R.string.data_filem_tidak_ditemukan)
                                             }
                                         }
 
                                         is Resource.Error -> {
                                             Log.d("SearchFragment", "onViewCreated: Error")
                                             binding.progressbar.hide()
+                                            binding.viewError.tvError.visibility = View.VISIBLE
                                             binding.viewError.tvError.text =
                                                 movies.msg ?: getString(
                                                     R.string.data_filem_tidak_ditemukan
@@ -98,7 +112,7 @@ class SearchFragment : Fragment() {
         with(binding.rvMovie) {
             layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)
-            this.adapter = searchAdapter
+            this.adapter = movieAdapter
         }
     }
 }

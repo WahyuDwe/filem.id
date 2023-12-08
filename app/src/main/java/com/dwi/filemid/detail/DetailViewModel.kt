@@ -8,5 +8,6 @@ import com.dwi.filmid.core.domain.usecase.MoviesUseCase
 class DetailViewModel(private val moviesUseCase: MoviesUseCase) : ViewModel() {
     fun getDetailMovie(movieId: Int) = moviesUseCase.getDetailMovie(movieId).asLiveData()
 
-    fun setFavoriteMovie(movies: Movies, newState: Boolean) = moviesUseCase.setFavoriteMovies(movies, newState)
+    fun setFavoriteMovie(movies: Movies, newState: Boolean) =
+        moviesUseCase.setFavoriteMovies(movies, newState)
 }

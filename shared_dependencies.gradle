@@ -14,4 +14,7 @@ dependencies {
     // koin
     implementation(libs.koin.core)
     implementation(libs.koin.android)
+
+    // lottie
+    implementation(libs.lottie)
 }

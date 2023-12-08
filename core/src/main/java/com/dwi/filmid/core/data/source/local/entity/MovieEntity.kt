@@ -26,7 +26,7 @@ data class MovieEntity(
     val releaseDate: String,
 
     @ColumnInfo(name = "movie_type")
-    val movieType: String?,
+    val movieType: String? = null,
 
     @ColumnInfo(name = "movie_rating")
     val movieRating: Double,

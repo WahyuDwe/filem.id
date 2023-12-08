@@ -63,4 +63,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:trackCornerRadius="2dp" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_view_search"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/search_lottie" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/cari_filem_kesukaaanmu_disini"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/rv_movie"
+        app:layout_constraintStart_toStartOf="@+id/rv_movie"
+        app:layout_constraintTop_toBottomOf="@+id/lottie_view_search" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

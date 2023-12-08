@@ -34,6 +34,7 @@ object DataMapper {
             posterPath = it.posterPath,
             releaseDate = it.releaseDate,
             rating = it.movieRating,
+            movieType = it.movieType,
             isFavorite = it.isFavorite
         )
     }
@@ -45,7 +46,7 @@ object DataMapper {
         overview = input.overview,
         posterPath = input.posterPath,
         releaseDate = input.releaseDate,
-        movieType = null,
+        movieType = input.movieType,
         movieRating = input.rating,
         isFavorite = input.isFavorite
     )
@@ -58,6 +59,7 @@ object DataMapper {
         posterPath = input.posterPath,
         releaseDate = input.releaseDate,
         rating = input.movieRating,
+        movieType = input.movieType,
         isFavorite = input.isFavorite
     )
 

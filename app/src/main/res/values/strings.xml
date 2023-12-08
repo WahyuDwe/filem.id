@@ -12,4 +12,8 @@
     <string name="cari_filem">Cari Filem</string>
     <string name="cari">Cari...</string>
     <string name="data_filem_tidak_ditemukan">Data filem tidak ditemukan</string>
+    <string name="cari_filem_kesukaaanmu_disini">Cari filem kesukaaanmu disini</string>
+    <string name="overview">Overview</string>
+    <string name="favorite_button">favorite button</string>
+    <string name="image_poster_movie">image poster movie</string>
 </resources>

@@ -2,6 +2,7 @@ package com.dwi.filmid.favorite
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dwi.filemid.detail.DetailActivity
@@ -31,6 +32,10 @@ class FavoriteActivity : AppCompatActivity() {
 
         setUpAdapter()
         favoriteViewModel.favoriteMovies.observe(this) { favorite ->
+            if(favorite.isNullOrEmpty()) {
+                binding.lottieView.visibility = View.VISIBLE
+                binding.tvError.visibility = View.VISIBLE
+            }
             movieAdapter.setData(favorite)
             movieAdapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: Movies) {
