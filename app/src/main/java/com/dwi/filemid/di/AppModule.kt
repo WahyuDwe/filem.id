@@ -6,10 +6,11 @@ import com.dwi.filemid.search.SearchViewModel
 import com.dwi.filmid.core.domain.usecase.MoviesInteractor
 import com.dwi.filmid.core.domain.usecase.MoviesUseCase
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    factory<MoviesUseCase> { MoviesInteractor(get()) }
+    factory { MoviesInteractor(get()) } bind MoviesUseCase::class
 }
 
 val viewModelModule = module {
