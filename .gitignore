@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
+/core/src/main/java/com/dwi/filmid/core/utils/Constanta.kt
