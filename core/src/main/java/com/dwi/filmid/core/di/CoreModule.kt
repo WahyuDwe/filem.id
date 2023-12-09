@@ -9,6 +9,7 @@ import com.dwi.filmid.core.data.source.remote.RemoteDataSource
 import com.dwi.filmid.core.data.source.remote.network.ApiService
 import com.dwi.filmid.core.domain.repository.IMoviesRepository
 import com.dwi.filmid.core.utils.AppExecutors
+import com.dwi.filmid.core.utils.Constanta
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -38,7 +39,7 @@ val networkModule = module {
     }
     single {
         val retrofit = Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(Constanta.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()
