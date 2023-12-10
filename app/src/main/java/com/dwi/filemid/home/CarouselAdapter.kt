@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.dwi.filemid.databinding.ItemCarouselBinding
 import com.dwi.filemid.detail.DetailActivity
+import com.dwi.filmid.core.BuildConfig
 import com.dwi.filmid.core.R
 import com.dwi.filmid.core.domain.model.Movies
-import com.dwi.filmid.core.utils.Constanta
 import com.dwi.filmid.core.utils.DiffUtils
 
 class CarouselAdapter : RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder>() {
@@ -26,7 +26,7 @@ class CarouselAdapter : RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder>
                     carouselImageView.load(R.drawable.ic_placeholder)
                     carouselTextView.text = item.title
                 } else {
-                    carouselImageView.load(Constanta.IMAGE_URL + item.posterPath)
+                    carouselImageView.load(BuildConfig.IMAGE_URL + item.posterPath)
                     carouselTextView.text = item.title
                 }
             }

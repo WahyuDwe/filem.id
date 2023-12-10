@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import coil.load
 import com.dwi.filemid.databinding.ActivityDetailBinding
+import com.dwi.filmid.core.BuildConfig
 import com.dwi.filmid.core.data.source.Resource
 import com.dwi.filmid.core.domain.model.Movies
-import com.dwi.filmid.core.utils.Constanta
 import com.google.android.material.appbar.AppBarLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.dwi.filemid.R as Rapp
@@ -62,8 +62,8 @@ class DetailActivity : AppCompatActivity() {
     private fun populateContentDetail(data: Movies?) {
         if (data != null) {
             binding.apply {
-                ivDetailToolbar.load(Constanta.IMAGE_URL + data.posterPath)
-                detailImagePoster.load(Constanta.IMAGE_URL + data.posterPath)
+                ivDetailToolbar.load(BuildConfig.IMAGE_URL + data.posterPath)
+                detailImagePoster.load(BuildConfig.IMAGE_URL + data.posterPath)
                 detailTitle.text = data.title
                 detailDescription.text = data.overview
                 detailScore.text = String.format("%.1f", data.rating)

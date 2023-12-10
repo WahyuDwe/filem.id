@@ -6,10 +6,10 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.dwi.filmid.core.BuildConfig
 import com.dwi.filmid.core.R
 import com.dwi.filmid.core.databinding.ItemMoviePopularBinding
 import com.dwi.filmid.core.domain.model.Movies
-import com.dwi.filmid.core.utils.Constanta
 import com.dwi.filmid.core.utils.DiffUtils
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
@@ -24,7 +24,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                     imgPoster.scaleType = ImageView.ScaleType.CENTER_CROP
                     imgPoster.load(R.drawable.ic_placeholder)
                 } else {
-                    imgPoster.load(Constanta.IMAGE_URL + item.posterPath) {
+                    imgPoster.load(BuildConfig.IMAGE_URL + item.posterPath) {
                         crossfade(true)
                         placeholder(R.drawable.ic_placeholder)
                     }

@@ -21,9 +21,13 @@ android {
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
 
-        buildConfigField("String", "AUTHORIZATION", "\"${properties.getProperty("AUTHORIZATION")}\"")
-        buildConfigField("String", "BASE_URL", "\"${properties.getProperty("BASE_URL")}\"")
-        buildConfigField("String", "IMAGE_URL", "\"${properties.getProperty("IMAGE_URL")}\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        buildConfigField(
+            "String",
+            "KEY",
+            "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YmRiNGQyMjFiN2NhOTVhYTJjMGVhMzBiNmEzZGRhNCIsInN1YiI6IjYxZWYzMGIxZTlkYTY5MDA5NDhmYWE0ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YnEtkwaAjIcH4qqlwZeOXo-y2fYRM-q1P6dMZMdiGGQ\""
+        )
+        buildConfigField("String", "IMAGE_URL", "\"https://image.tmdb.org/t/p/original/\"")
     }
 
     buildTypes {

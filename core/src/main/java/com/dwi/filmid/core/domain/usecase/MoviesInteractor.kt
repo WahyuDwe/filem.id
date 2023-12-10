@@ -1,11 +1,11 @@
 package com.dwi.filmid.core.domain.usecase
 
-import com.dwi.filmid.core.data.source.MoviesRepository
 import com.dwi.filmid.core.data.source.Resource
 import com.dwi.filmid.core.domain.model.Movies
+import com.dwi.filmid.core.domain.repository.IMoviesRepository
 import kotlinx.coroutines.flow.Flow
 
-class MoviesInteractor(private val moviesRepository: MoviesRepository) : MoviesUseCase {
+class MoviesInteractor(private val moviesRepository: IMoviesRepository) : MoviesUseCase {
     override fun getAllNowPlayingMovies(): Flow<Resource<List<Movies>>> =
         moviesRepository.getAllNowPlayingMovies()
 
