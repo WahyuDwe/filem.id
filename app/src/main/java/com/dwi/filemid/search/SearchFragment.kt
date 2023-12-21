@@ -56,6 +56,9 @@ class SearchFragment : Fragment() {
                                         is Resource.Success -> {
                                             Log.d("SearchFragment", "onViewCreated: Success")
                                             binding.progressbar.hide()
+                                            binding.viewError.lottieView.visibility = View.GONE
+                                            binding.viewError.tvError.visibility = View.GONE
+
                                             movies.data?.let { movieAdapter.setData(it) }
                                             movieAdapter.setOnItemClickCallback(object :
                                                 MovieAdapter.OnItemClickCallback {
