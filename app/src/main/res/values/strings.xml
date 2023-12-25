@@ -1,16 +1,14 @@
 <resources>
     <string name="app_name">FilemId</string>
     <string name="title_favorite">Favorite</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="open_navigation_drawer">Open navigation drawer</string>
     <string name="close_navigation_drawer">Close navigation drawer</string>
     <string name="favorit">Favorit</string>
     <string name="beranda">Beranda</string>
-    <string name="paling_populer">Paling Populer</string>
+    <string name="paling_populer">Paling Popular</string>
     <string name="lagi_tayang">Lagi Tayang</string>
     <string name="cari_filem">Cari Filem</string>
-    <string name="cari">Cari...</string>
+    <string name="cari">Cari…</string>
     <string name="data_filem_tidak_ditemukan">Data filem tidak ditemukan</string>
     <string name="cari_filem_kesukaaanmu_disini">Cari filem kesukaaanmu disini</string>
     <string name="overview">Overview</string>
